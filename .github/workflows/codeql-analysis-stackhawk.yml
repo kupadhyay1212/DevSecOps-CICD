@@ -74,3 +74,9 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
+  # now run the StackHawk scan
+    - name: StackHawk HawkScan Action
+      uses: stackhawk/hawkscan-action@v2.0.2
+      with:
+        apiKey: ${{ secrets.HAWK_API_KEY }} 
+ 
