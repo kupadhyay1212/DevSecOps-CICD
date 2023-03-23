@@ -1,11 +1,10 @@
+name: snoar cloud
 on:
   # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request.
-  push:
-    branches:
-      - master
-  pull_request:
-      types: [opened, synchronize, reopened]
+ # push:
+  branches:[ master]
+  workflow_dispatch:
+  
 name: Main Workflow
 jobs:
   sonarcloud:
