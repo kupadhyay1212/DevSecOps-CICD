@@ -1,0 +1,37 @@
+name: Node.js Security Scan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        run: |
+          curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+
+      - name: Install nodejsscan
+        run: npm install -g nodejsscan
+
+      - name: Run nodejsscan
+        run: nodejsscan .
+
+    # Notify the user of the results
+  #  if: always()
+  #  steps:
+   #   - name: Send Slack notification
+   #     uses: voxmedia/slack-action@v1
+    #    with:
+     #     token: ${{ secrets.SLACK_TOKEN }}
+      #    channel: '#security'
+       #   text: "Node.js security scan results: `$(cat nodejsscan.report)`"
